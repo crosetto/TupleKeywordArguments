@@ -3,7 +3,7 @@
 This example covers three topics:
 1. how to implement your own tuple (which might be useful in cases where you cannot use the std::tuple,
    like when compiling CUDA kernels with nvcc)
-2. how to build a "python-like" keyword-argument initialization for the tuple, with zero runtime cost, which allows to initialize objects with
+2. how to build a "python-like" keyword-argument initialization for the tuple, with zero runtime overhead, which allows to initialize objects with
    the arguments out of order, and skipping some of the elements (which are default-initialized).
 3. shows with a practical example why we need perfect forwarding and forwarding references.
 
