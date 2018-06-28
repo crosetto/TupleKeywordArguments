@@ -210,8 +210,7 @@ the rvalue references as such, otherwise (without std::forward) they'd be passed
 reference.
 
 ```C++
-	constexpr tuple<bool, char, double, int> ctuple( pos<1>( false ), pos<3>( 3.14 ),
-													 pos<2>( 'm' ) );
+	constexpr tuple<bool, char, double, int> ctuple( pos<1>( false ), pos<3>( 3.14 ), pos<2>( 'm' ) );
 	static_assert( ctuple.get<1>() == false, "error" );
 	static_assert( ctuple.get<2>() == 'm', "error" );
 	static_assert( ctuple.get<3>() == 3.14, "error" );
