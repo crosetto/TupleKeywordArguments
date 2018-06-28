@@ -209,6 +209,14 @@ have to make sure we forward
 the rvalue references as such, otherwise (without std::forward) they'd be passed on as lvalue
 reference.
 
+Now the only thithing left is to define a ser friendly type alias for our sized_tuple, which meets the target API
+```C++
+template <typename... T>
+using tuple = sized_tuple<sizeof...( T ), T...>;
+```
+
+And we can use it as follows
+
 ```C++
 	constexpr tuple<bool, char, double, int> ctuple( pos<1>( false ), pos<3>( 3.14 ), pos<2>( 'm' ) );
 	static_assert( ctuple.get<1>() == false, "error" );
