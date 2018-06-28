@@ -30,6 +30,8 @@ auto t3=tuple{arg<5>(std::make_unique<double>())};
 ```
 We implement this kind of tuple from scratch, and we can do it in relatively few lines of code.
 
+DISCLAIMER: this code is not safe for use in production, since I omitted all the protections for the sake of clarity.
+
 ## Tuple
 
 We start by defining our own tuple. To this end:
