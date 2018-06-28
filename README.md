@@ -1,11 +1,12 @@
 # Tuple, move semantic and perfect forwarding
 
-This example covers three topics:
+This example covers few topics:
 1. how to implement your own tuple (which might be useful in cases where you cannot use the std::tuple,
    like when compiling CUDA kernels with nvcc)
-2. how to build a "python-like" keyword-argument initialization for the tuple, with zero runtime overhead, which allows to initialize objects with
+2. how to build a "python-like" keyword-argument initialization for the tuple, with zero runtime overhead, which allows to initialize tuple objects with
    the arguments out of order, and skipping some of the elements (which are default-initialized).
 3. shows with a practical example why we need perfect forwarding and forwarding references.
+4. shows once again the use (and the power) of constexpr: this tuple can be instantiated as a compile time constant, just like std::tuple.
 
 This example turns out to be a great opportunity to understand the caveats of move semantics and
 perfect forwarding: we want to be able to store move-only objects in our tuple, like a 
