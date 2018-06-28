@@ -138,7 +138,7 @@ struct position {
 	}
 
 	static constexpr int index = Index;
-	Type&				 value;
+	Type& value;
 };
 ```
 
@@ -154,7 +154,7 @@ as well as regular lvalues with a single constructor:
   pass in lvalue references.
 
 We define a handy function just to get a more friendly API
-```
+```C++
 template <int Index, typename Type>
 auto constexpr pos( Type&& value )
 {
@@ -178,7 +178,7 @@ a quadratic algorithm to initialize all the elements in the tuple.
 But the recursive function is declared constexpr, and the recursion happens at compile time.
 There is no runtime overhead in initializing the arguments this way.
 
-```
+```C++
 //recursion anchor
 template <int N, typename Element>
 constexpr auto initialize() { return Element{}; }
@@ -196,7 +196,7 @@ constexpr auto initialize( X&& x, Rest&&... rest )
 
 We can eventually define the constructor for the generic tuple:
 
-```
+```C++
 	template <int Idx, typename Type, typename... GenericElements>
 	constexpr sized_tuple( position<Idx, Type>&& t, GenericElements&&... x )
 		: super( std::forward<position<Idx, Type>>( t ), std::forward<GenericElements>( x )... )
@@ -226,7 +226,7 @@ reference.
 ```
 
 We can check the "zero overhead" by making up a tuple with several members, say
-```
+```C++
 	tuple<int, int, int
 		  ,double*
 		  ,std::unique_ptr<std::string>
