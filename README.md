@@ -209,7 +209,7 @@ We can eventually define the constructor for the generic tuple:
 	}
 ```
 
-Now the only thithing left is to define a ser friendly type alias for our sized_tuple, which meets the target API
+Now the only thithing left is to define a user friendly type alias for our sized_tuple, which meets the target API
 ```C++
 template <typename... T>
 using tuple = sized_tuple<sizeof...( T ), T...>;
