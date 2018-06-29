@@ -201,17 +201,13 @@ constexpr auto initialize( X&& x, Rest&&... rest )
 We can eventually define the constructor for the generic tuple:
 
 ```C++
-	template <int Idx, typename Type, typename... GenericElements>
-	constexpr sized_tuple( position<Idx, Type>&& t, GenericElements&&... x )
-		: super( std::forward<position<Idx, Type>>( t ), std::forward<GenericElements>( x )... )
-		, m_value( initialize<s_index, Element>( std::forward<position<Idx, Type>>( t ), std::forward<GenericElements>( x )... ) )
+	template <typename... GenericElements>
+	constexpr sized_tuple( GenericElements&&... x )
+		: super( std::forward<GenericElements>( x )... )
+		, m_value( initialize<s_index, First>( std::forward<GenericElements>( x )... ) )
 	{
 	}
 ```
-The fact that we need to repeat std::forward every time is very tedious, but it's the only way we
-have to make sure we forward
-the rvalue references as such, otherwise (without std::forward) they'd be passed on as lvalue
-reference.
 
 Now the only thithing left is to define a ser friendly type alias for our sized_tuple, which meets the target API
 ```C++
