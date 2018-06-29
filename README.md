@@ -253,7 +253,7 @@ by compiling it with optimization on, running it on GDB until the element access
 (gdb) run
 (gdb) layout split
 ```
-One sees that accessing the element at position 4 results in a single ```mov``` instruction:
+One sees that both initializing the tuple and accessing the element at position 4 result in a single ```mov``` instruction, e.g.:
 ```
 mov    %rax,0x8(%rsp)
 ```

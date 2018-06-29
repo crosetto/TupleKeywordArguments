@@ -152,6 +152,8 @@ int main()
 
 	volatile auto tmp = storage1;
 	volatile auto tmp2 = tuple3.get<4>();
+
+	tuple3.set<5>(std::make_unique<std::string>("ciao\n"));
 	auto&& tmp3 = tuple3.get<5>();
 	std::cout<<*tmp3<<"\n";
 }
