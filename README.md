@@ -1,11 +1,12 @@
 # Tuple, move semantic and perfect forwarding
 
-This example covers three topics:
+This example covers few topics:
 1. how to implement your own tuple (which might be useful in cases where you cannot use the std::tuple,
    like when compiling CUDA kernels with nvcc)
-2. how to build a "python-like" keyword-argument initialization the tuple, with zero runtime cost, which allows to initialize objects with
+2. how to build a "python-like" keyword-argument initialization for the tuple, with zero runtime overhead, which allows to initialize tuple objects with
    the arguments out of order, and skipping some of the elements (which are default-initialized).
 3. shows with a practical example why we need perfect forwarding and forwarding references.
+4. shows once again the use (and the power) of constexpr: this tuple can be instantiated as a compile time constant, just like std::tuple.
 
 This example turns out to be a great opportunity to understand the caveats of move semantics and
 perfect forwarding: we want to be able to store move-only objects in our tuple, like a 
@@ -24,9 +25,10 @@ But the user doesn't want necessarily to initialize all the arguments at constru
 using name=arg<5>;
 using y=arg<2>;
 using z=arg<3>;
-auto t1=tuple{name("Object1"), y(3)};
-auto t2=tuple{name("Object2"), z(6)};
-auto t3=tuple{arg<5>(std::make_unique<double>())};
+using t=tuple<int, int, int, std::unique_ptr<double>, std:string, bool>
+auto t1=t{name("Object1"), y(3)};
+auto t2=t{name("Object2"), z(6)};
+auto t3=t{arg<5>(std::make_unique<double>())};
 ```
 We implement this kind of tuple from scratch, and we can do it in relatively few lines of code.
 
