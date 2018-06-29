@@ -70,10 +70,10 @@ private:
 public:
 	typedef sized_tuple<NDim, Types...> super;
 
-	template <int Idx, typename Type, typename... GenericElements>
-	constexpr sized_tuple( position<Idx, Type>&& t, GenericElements&&... x )
-		: super( std::forward<position<Idx, Type>>( t ), std::forward<GenericElements>( x )... )
-		, m_value( initialize<s_index, First>( std::forward<position<Idx, Type>>( t ), std::forward<GenericElements>( x )... ) )
+	template <typename... GenericElements>
+	constexpr sized_tuple( GenericElements&&... x )
+		: super( std::forward<GenericElements>( x )... )
+		, m_value( initialize<s_index, First>( std::forward<GenericElements>( x )... ) )
 	{
 	}
 
@@ -132,7 +132,8 @@ int main()
 				//pos<3>(std::string("pink pig"))
 		);
 
-	tuple2.set<3>(std::make_unique<std::string>(std::string("black dog")));
+	auto p = std::make_unique<std::string>(std::string("black dog"));
+	tuple2.set<3>(p);
 
 	std::cout << *tuple2.get<3>() << std::endl;
 
@@ -141,12 +142,13 @@ int main()
 	auto storage1 = &d;
 	auto storage2 = &d;
 
+	auto p4 = pos<4>( storage2 );
 	tuple<int, int, int
 		  ,double*
 		  ,std::unique_ptr<std::string>
 		  ,bool
 		  >
-		tuple3( pos<4>( storage2 ) );
+		tuple3( p4 );
 
 	volatile auto tmp = storage1;
 	volatile auto tmp2 = tuple3.get<4>();
