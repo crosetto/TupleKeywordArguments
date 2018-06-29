@@ -64,12 +64,6 @@ private:
 public:
 	typedef sized_tuple<NDim, Types...> super;
 
-	constexpr sized_tuple()
-		: super()
-		, m_value( initialize<s_index, First>() )
-	{
-	}
-
 	template <int Idx>
 	constexpr auto&& get() const
 	{
@@ -95,9 +89,7 @@ while the case stopping the recursion (not inheriting from anything)
 // recursion anchor
 template <int NDim> struct sized_tuple<NDim> {
   template <typename... GenericElements>
-  constexpr sized_tuple(GenericElements const &...) {}
-
-  constexpr sized_tuple() {}
+  constexpr sized_tuple(GenericElements &&...) {}
 
   static const int s_index = NDim + 1;
 

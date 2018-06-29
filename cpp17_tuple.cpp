@@ -9,9 +9,7 @@ struct sized_tuple;
 template <int NDim>
 struct sized_tuple<NDim> {
 	template <typename... GenericElements>
-	constexpr sized_tuple( GenericElements const&... ) {}
-
-	constexpr sized_tuple() {}
+	constexpr sized_tuple( GenericElements &&... ) {}
 
 	static const int s_index = NDim + 1;
 
@@ -77,12 +75,6 @@ public:
 	{
 	}
 
-	constexpr sized_tuple()
-		: super()
-		, m_value( initialize<s_index, First>() )
-	{
-	}
-
 	template <int Idx>
 	constexpr auto&& get() const
 	{
@@ -114,6 +106,8 @@ using tuple = sized_tuple<sizeof...( T ), T...>;
 int main()
 {
 
+	// constexpr tuple<bool, std::unique_ptr<char>, double, int> ctuple( pos<1>( false ), pos<3>( 3.14 ),
+	// 												 pos<2>( std::make_unique<char>('m') ) );
 	constexpr tuple<bool, char, double, int> ctuple( pos<1>( false ), pos<3>( 3.14 ),
 													 pos<2>( 'm' ) );
 	static_assert( ctuple.get<1>() == false, "error" );
