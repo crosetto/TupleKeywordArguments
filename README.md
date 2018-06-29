@@ -50,7 +50,7 @@ template <int NDim, typename... Types> struct sized_tuple;
 The tuple dimension gets forwarded to all the hierarchy of objects, and it is used to compute the "s_index"
 (the position of the element in the tuple), as shown below. We have two
 template specializations: one for the generic case, and one for the empty tuple
-(which represents the last child in the hierarchy, and stops all template recursions).
+(which represents the first parent in the hierarchy, and stops all template recursions).
 The generic case looks as follows (we omit the constructor for the moment)
 
 ```C++
