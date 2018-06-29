@@ -166,8 +166,8 @@ To this end we implement a helper function, to which we give the original name "
 a function we call for every
 elementin the tuple. It is a regular
 recursive constexpr function, "iterating" over the arguments passed to the tuple constructor.
-If the numeric position (s_index) of the given tuple element matches with the index of one of the argument,
- the element get initialized with that value. Otherwise the element is initialized with the default
+If the numeric position (s_index) of the given tuple element matches with the index of one of the arguments,
+ the element gets initialized with that value. Otherwise the element is initialized with the default
  constructor.
 This would be extremely inefficient if we had to execute it at run time:
 a quadratic algorithm to initialize all the elements in the tuple.
@@ -201,7 +201,7 @@ We can eventually define the constructor for the generic tuple:
 	}
 ```
 
-Now the only thithing left is to define a user friendly type alias for our sized_tuple, which meets the target API
+Now what's left is to define a user friendly type alias for our sized_tuple, which meets the target API
 ```C++
 template <typename... T>
 using tuple = sized_tuple<sizeof...( T ), T...>;
