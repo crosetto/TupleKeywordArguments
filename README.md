@@ -20,7 +20,7 @@ Would be a tuple
 ```C++
 using type=std::tuple<int, int, int, std::unique_ptr<double>, std:string, bool>;
 ```
-But the user doesn't want necessarily to initialize all the arguments at construction. He wants a python-like API:
+But say we don't want necessarily to initialize all the arguments at construction, and we need this API:
 ```C++
 using name=arg<5>;
 using y=arg<2>;
