@@ -28,7 +28,7 @@ using z=arg<3>;
 using t=tuple<int, int, int, std::unique_ptr<double>, std:string, bool>
 auto t1=t{name("Object1"), y(3)};
 auto t2=t{name("Object2"), z(6)};
-auto t3=t{arg<5>(std::make_unique<double>())};
+auto t3=t{arg<4>(std::make_unique<double>())};
 ```
 We implement this kind of tuple from scratch, and we can do it in relatively few lines of code.
 
